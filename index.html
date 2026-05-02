@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EPIC TECH AI — Sm0ken42O</title>
+    <style>
+        :root {
+            --neon: #00ffcc;
+            --accent: #ff00aa;
+            --deep: #0a0022;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: var(--deep);
+            color: var(--neon);
+            font-family: "Courier New", monospace;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            cursor: default;
+        }
+
+        .grid {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(rgba(0,255,204,0.08) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,255,204,0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 15s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        .scanline {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0,255,204,0.15) 50%);
+            background-size: 100% 6px;
+            pointer-events: none;
+            animation: scan 4s linear infinite;
+            z-index: 2;
+            opacity: 0.4;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(400%); }
+        }
+
+        .scene {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px;
+            z-index: 5;
+            opacity: 0;
+            transition: opacity 2.5s ease-in-out;
+        }
+
+        .scene.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .content {
+            max-width: 1000px;
+            z-index: 10;
+        }
+
+        .heading {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #00ffcc;
+            text-shadow: 0 0 40px #00ffcc, 0 0 80px #00ff99;
+            margin-bottom: 40px;
+            letter-spacing: 4px;
+        }
+
+        .text {
+            font-size: 1.55rem;
+            line-height: 2.0;
+            text-shadow: 0 0 25px #00ffcc, 0 0 50px #00ff99;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 16px;
+            text-transform: uppercase;
+            text-shadow: 0 0 40px #00ffcc, 0 0 90px #00ffcc, 0 0 150px #ff00aa;
+            cursor: pointer;
+            transition: all 0.8s ease;
+            margin-bottom: 30px;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 50px #fff, 0 0 120px #00ffcc, 0 0 180px #ff00aa;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-top: 30px;
+            letter-spacing: 8px;
+            text-shadow: 0 0 30px #00ffcc;
+        }
+
+        .lightning {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.85);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 6;
+            mix-blend-mode: screen;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #00ffcc;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #00ffcc;
+            pointer-events: none;
+            z-index: 7;
+            animation: particleFloat 4s forwards;
+        }
+
+        @keyframes particleFloat {
+            to {
+                opacity: 0;
+                transform: translate(var(--x), var(--y));
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            color: #00ffcc;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            z-index: 100;
+            text-align: center;
+            padding: 40px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="grid"></div>
+<div class="scanline"></div>
+<div class="lightning" id="lightning"></div>
+
+<div class="scene active" id="scene0">
+    <div class="content">
+        <div class="heading">MULTIMEDIA ARTIST ON A MISSION</div>
+        <div class="text">
+            Making music, videos, and AI art fueled by cannabis &amp; caffeine.<br>
+            Creative chaos architect. Join the transmission.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene1">
+    <div class="content">
+        <div class="text">
+            THE ARCHITECT AWAKENS<br><br>
+            We tailor our cutting-edge technologies to match your specific requirements.<br><br>
+            100+ repos • 3,469 contributions • Full-stack AI systems built from first principles.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene2">
+    <div class="content">
+        <div class="text">
+            THE FRONTEND REALM<br><br>
+            Next.js • TypeScript • React • Tailwind • Three.js • WebGL<br><br>
+            Every interface we build feels alive — because we tailor the experience to your exact vision.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene3">
+    <div class="content">
+        <div class="text">
+            THE AGENT SWARM<br><br>
+            Autonomous Python agents. Multi-agent orchestration.<br>
+            GPT-Researcher • Epic-AI • Custom tool-using swarms.<br><br>
+            We deploy swarms tailored to your specific operational requirements.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene4">
+    <div class="content">
+        <div class="text">
+            THE CREATIVE INFERNO<br><br>
+            Riffusion • Stable Diffusion • Audio-reactive visuals • Real-time generative systems.<br><br>
+            We generate custom AI media pipelines tailored to your unique creative direction.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene5">
+    <div class="content">
+        <div class="text">
+            LIVE FROM THE LOUNGE<br><br>
+            AI Lounge After Dark v3<br>
+            Immersive Vercel-powered worlds • Real-time collaborative environments.<br><br>
+            We build experiences tailored to your brand, audience, and frequency.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene6">
+    <div class="content">
+        <div class="text">
+            THE ABSOLUTE ALGORITHM<br><br>
+            Web3 • Supabase • Stripe • C++ performance layers • Full autonomous infrastructure.<br><br>
+            Every component is engineered and tailored to serve your specific mission.
+        </div>
+    </div>
+</div>
+
+<div class="scene" id="scene7">
+    <div class="content">
+        <div id="finalLogo" class="logo">
+            EPIC TECH AI
+            <div class="subtitle">TAILORED CUTTING-EDGE TECHNOLOGIES FOR YOUR SPECIFIC REQUIREMENTS</div>
+        </div>
+    </div>
+</div>
+
+<div class="overlay" id="audioOverlay">
+    Click anywhere to start the frequency transmission
+</div>
+
+<script>
+const audio = new Audio('Torus_Knot.mp3');
+audio.loop = true;
+audio.volume = 0.75;
+
+const overlay = document.getElementById('audioOverlay');
+
+function startAudio() {
+    audio.play().catch(() => {
+        overlay.style.display = 'flex';
+    });
+}
+
+function playAudio() {
+    audio.play();
+    overlay.style.display = 'none';
+}
+
+const scenes = document.querySelectorAll('.scene');
+let current = 0;
+const timings = [7000, 7000, 7000, 7000, 7000, 7000, 7000, 0];
+
+function nextScene() {
+    scenes[current].classList.remove('active');
+    current = (current + 1) % scenes.length;
+    scenes[current].classList.add('active');
+}
+
+let delay = 0;
+timings.forEach(time => {
+    if (time > 0) {
+        delay += time;
+        setTimeout(nextScene, delay);
+    }
+});
+
+function lightningStrike() {
+    const lightning = document.getElementById('lightning');
+    lightning.style.opacity = '0.7';
+    setTimeout(() => lightning.style.opacity = '0', 200);
+    createParticles(15);
+}
+
+function createParticles(count) {
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.top = Math.random() * 80 + 'vh';
+        p.style.setProperty('--x', (Math.random() - 0.5) * 600 + 'px');
+        p.style.setProperty('--y', (Math.random() - 0.5) * 400 - 50 + 'px');
+        p.style.animationDuration = (2 + Math.random() * 2) + 's';
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 6000);
+    }
+}
+
+document.addEventListener('click', () => {
+    if (overlay.style.display !== 'none') playAudio();
+    lightningStrike();
+});
+
+document.addEventListener('keydown', () => {
+    if (overlay.style.display !== 'none') playAudio();
+});
+
+window.onload = () => {
+    scenes[0].classList.add('active');
+    startAudio();
+    
+    setInterval(() => {
+        if (Math.random() > 0.6) lightningStrike();
+    }, 3500);
+    
+    setInterval(() => {
+        if (Math.random() > 0.7) createParticles(8);
+    }, 1800);
+};
+
+document.getElementById('finalLogo').addEventListener('click', () => {
+    const logo = document.getElementById('finalLogo');
+    logo.style.transition = 'all 2s';
+    logo.style.transform = 'scale(0.7) rotate(15deg)';
+    logo.style.opacity = '0.2';
+    
+    setTimeout(() => {
+        alert("TRANSMISSION COMPLETE\n\nWe tailor our cutting-edge technologies to match your specific requirements.\n\nWelcome to the Epic Tech AI experience.");
+        logo.style.transition = 'all 1.5s';
+        logo.style.transform = 'scale(1) rotate(0deg)';
+        logo.style.opacity = '1';
+    }, 1200);
+};
+</script>
+
+</body>
+</html>

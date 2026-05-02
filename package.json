@@ -1,0 +1,12 @@
+{
+  "name": "epic-tech-intro",
+  "version": "1.0.0",
+  "description": "Neon cyberpunk intro for Epic Tech AI by Sm0ken42O",
+  "scripts": {
+    "dev": "serve . -p 3000",
+    "start": "serve . -p 3000"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
