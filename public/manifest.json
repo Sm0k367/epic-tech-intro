@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest",
+  "name": "Epic Tech AI Intro",
+  "short_name": "EpicTechAI",
+  "description": "Neon cyberpunk intro for Sm0ken42O - Epic Tech AI",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0022",
+  "theme_color": "#00ffcc",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
